@@ -1,6 +1,6 @@
 - hosts: all
   become: true
-  gathering_facts: no
+  gather_facts: no
 
   tasks:
     - name: Install required packages
