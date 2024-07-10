@@ -59,7 +59,7 @@ pipeline {
                 for (environ in environments) {        
                     stage("Build and Deploy to ${environ} environment") {
                     withCredentials([usernamePassword(credentialsId:"sshCreds",passwordVariable:"sshPass",usernameVariable:"sshUser")]){
-                     sh "ansible-playbook ansible/install-docker.yml -i ${env.WORKSPACE}/${environ}_${ANSIBLE_INVENTORY} -e ansible_ssh_user=azureuser -e ansible_ssh_pass=Password1234!"
+                     sh "ansible-playbook ansible/install-docker.yml -i ${env.WORKSPACE}/${environ}_${ANSIBLE_INVENTORY} -e ansible_ssh_user=${env.sshUser.trim()} -e ansible_ssh_pass=${env.sshPass.trim()}"
                      }
                     docker.build("${DOCKER_IMAGE}:${environ}", "-f Dockerfile .")
                     withCredentials([usernamePassword(credentialsId:"DockerHubCreds",passwordVariable:"dockerPass",usernameVariable:"dockerUser")]){
