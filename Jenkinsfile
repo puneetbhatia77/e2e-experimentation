@@ -64,7 +64,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId:"sshCreds",passwordVariable:"sshPass",usernameVariable:"sshUser")]){
                      sh "echo ansible_ssh_user=${env.sshUser.trim()}, ansible_ssh_pass=${env.sshPass.trim()}"
                      sh "cat ${env.WORKSPACE}/${environ}_${ANSIBLE_INVENTORY}"
-                     sh "ansible-playbook ansible/install-docker.yml -i ${env.WORKSPACE}/${environ}_${ANSIBLE_INVENTORY} -e ansible_ssh_user=azureuser -e ansible_ssh_pass=Password1234!"
+                     sh "ansible-playbook ${vmPublicIp.trim()} ansible/install-docker.yml  -e ansible_ssh_user=azureuser -e ansible_ssh_pass=Password1234!"
                      }
                     docker.build("${DOCKER_IMAGE}:${environ}", "-f Dockerfile .")
                     withCredentials([usernamePassword(credentialsId:"DockerHubCreds",passwordVariable:"dockerPass",usernameVariable:"dockerUser")]){
