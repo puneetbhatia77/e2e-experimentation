@@ -43,7 +43,7 @@ pipeline {
 
                         // Write the inventory file
                         writeFile file: "${env.WORKSPACE}/${environ}_${ANSIBLE_INVENTORY}", text: """
-                        ${vmPublicIp}
+                        ${vmPublicIp.trim()}
                         """
                       }
                     }
