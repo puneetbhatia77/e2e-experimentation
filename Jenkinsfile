@@ -41,12 +41,13 @@ pipeline {
                         username = sh(script: 'terraform output -raw admin_username', returnStdout: true).trim()
                         password = sh(script: 'terraform output -raw admin_password', returnStdout: true).trim()
                           
-                        sh "rm -f ${env.WORKSPACE}/${environ}_${ANSIBLE_INVENTORY}"
+                        //sh "rm -f ${env.WORKSPACE}/${environ}_${ANSIBLE_INVENTORY}"
                           
                         // Write the inventory file
-                        writeFile file: "${env.WORKSPACE}/${environ}_${ANSIBLE_INVENTORY}", text: """
-                        ${vmPublicIp.trim()}
-                        """
+                        //writeFile file: "${env.WORKSPACE}/${environ}_${ANSIBLE_INVENTORY}", text: """
+                        //${vmPublicIp.trim()}
+                        "//""
+                         sh "echo ${vmPublicIp.trim()} > ${environ}_${ANSIBLE_INVENTORY}"
                       }
                     }
                 }
