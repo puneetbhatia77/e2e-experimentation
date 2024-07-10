@@ -44,10 +44,10 @@ pipeline {
                         sh "rm -f ${env.WORKSPACE}/${environ}_${ANSIBLE_INVENTORY}"
                           
                         // Write the inventory file
-                        //writeFile file: "${env.WORKSPACE}/${environ}_${ANSIBLE_INVENTORY}", text: """
-                        //${vmPublicIp.trim()}
+                        writeFile file: "${env.WORKSPACE}/${environ}_${ANSIBLE_INVENTORY}", text: """
+                        ${vmPublicIp.trim()}
                         
-                         sh "echo ${vmPublicIp.trim()} > ${env.WORKSPACE}/${environ}_${ANSIBLE_INVENTORY}"
+                         //sh "echo ${vmPublicIp.trim()} > ${env.WORKSPACE}/${environ}_${ANSIBLE_INVENTORY}"
                       }
                     }
                 }
