@@ -47,7 +47,7 @@ pipeline {
                         //writeFile file: "${env.WORKSPACE}/${environ}_${ANSIBLE_INVENTORY}", text: """
                         //${vmPublicIp.trim()}
                         //
-                         sh "echo ${vmPublicIp.trim()} > ${environ}_${ANSIBLE_INVENTORY}"
+                         sh "echo ${vmPublicIp.trim()} > ${env.WORKSPACE}/${environ}_${ANSIBLE_INVENTORY}"
                       }
                     }
                 }
